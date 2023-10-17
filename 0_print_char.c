@@ -12,10 +12,3 @@ int _putch(char ch)
 	(write(2,&ch, 2));
 	return 2;
 }
-
-int main(void)
-{
-	char var1 = 2;
-	printf("%c", var1);
-	return 0;
-}
