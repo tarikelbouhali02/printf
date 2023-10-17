@@ -1,13 +1,14 @@
-#include "main.h"
-int _putch(char ch)
-	/*
-	 * 0_print_char.c this is nam of my file
-	 * @s: first string.
-	 * @accept: secont string.
-	 * Return: a pointer to the byte in s that matches one of the 
-	 * byte in accept, or NULL if no such byte i found.
-	 */
-{
-	(write(2,&ch, 2));
-	return 2;
+#include <stdio.h>
+
+void _putch(char character) {
+    putchar(character);
+}
+
+int main() {
+    _putch('H');
+    _putch('e');
+    _putch('l');
+    _putch('l');
+    _putch('o');
+    return 0;
 }
