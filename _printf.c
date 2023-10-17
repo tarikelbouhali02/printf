@@ -1,62 +1,72 @@
-#include <stdio.h>
-#include <stdarg.h>
+#include "main.h"
+/**
+ * _printf - print a string to stdout.
+ * @format: The input string.
+ *
+ * Return: cnt.
+*/
+int _printf(const char *format, ...)
+{
+    int cnt;
 
-int _printf(const char *format, ...) {
+    cnt = 0;
     va_list args;
     va_start(args, format);
-
-    int char_count = 0;
-
-    while (*format) {
-        if (*format != '%') {
-            putchar(*format);
-            char_count++;
-        } else {
-            format++; // Move past '%'
-            if (*format == '\0') break; // End of format string
-
-            switch (*format) {
-                case 'c': {
-                    int c = va_arg(args, int);
-                    putchar(c);
-                    char_count++;
-                    break;
+    if (!format || !format[0])
+        return (-1);
+    while (*format)
+    {
+        if (*format == '%')
+        {
+            format  = format + 1;
+            if (*format == 'c') // print character
+            {
+                char cha = va_arg(args, int);
+                _putch(cha);
+                cnt = cnt + 1;
+                format = format + 1;
+            }
+            else if (*format == 's') // print argument string
+            {
+                char *string =  va_arg(args, char*);
+                int a = print_str(string);
+                cnt = cnt + a;
+                format++;
+            }
+            else if (*format == '%') //for %% print %
+            {
+                _putch('%');
+                cnt = cnt + 1;
+                format = format + 1;
+            }
+            else if (*format == 'd' || *format == 'i')
+            {
+                int nombre = va_arg(args, int);
+                int ncnt;
+                if (nombre < 0)
+                    cnt = cnt + 1;
+                ncnt = long_nbr(nombre);
+                format++;
+                cnt = cnt + ncnt;
+                print_nombre(nombre);
+            }
+            else // %string or other character
+            {
+                if (*format)
+                {
+                    format = format - 1;
+                    _putch(*format);
+                    format = format + 1;
                 }
-                case 's': {
-                    char *str = va_arg(args, char*);
-                    if (str != NULL) {
-                        while (*str) {
-                            putchar(*str);
-                            str++;
-                            char_count++;
-                        }
-                    } else {
-                        fputs("(null)", stdout);
-                        char_count += 6; // Length of "(null)"
-                    }
-                    break;
-                }
-                case '%':
-                    putchar('%');
-                    char_count++;
-                    break;
-                default:
-                    putchar('%'); // Print the '%' character itself
-                    putchar(*format); // Print the unknown character
-                    char_count += 2;
-                    break;
+                cnt = cnt + 1;
             }
         }
-        format++;
+        else
+        {
+            _putch(*format);
+            cnt = cnt + 1;
+            format = format + 1;
+        }
     }
-
-    va_end(args);
-    return char_count;
-}
-
-int main() {
-    int count = _printf("Hello, %c World! This is a %s example: %%\n", 'C', "printf");
-    printf("\nTotal characters printed: %d\n", count);
-
-    return 0;
+    return cnt;
 }

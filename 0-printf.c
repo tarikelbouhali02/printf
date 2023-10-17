@@ -9,6 +9,6 @@ int _putch(char ch)
  *byte in accept, or NULL if no such byte i found.
  */ 
 {
-    (write(1, &ch, 1));
+    write(1, &ch, 1);
     return 1;
 }
