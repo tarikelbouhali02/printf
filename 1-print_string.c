@@ -1,24 +1,22 @@
 #include "main.h"
 
-
-
-int print_str(char *string)
-{
-    int v = 0;
-
-    if (!string)
-    {
-        print_str("(null)");
-        return 0;
-    }
-    else
-    {
-        while (*string)
-        {
-            _putch(*string);
-            string++;
-            v++;
+int printString(char *str) {
+    int cnt = 0;
+    
+    if (!str) {
+        printString("(null)");
+        return;
+    } else {
+        while (*str) {
+            putCharacter(*str);
+            str++;
+            cnt++;
         }
     }
-    return (v);
+    
+    return cnt;
+}
+
+void putCharacter(char c) {
+    // Implement the logic for printing a character here.
 }
