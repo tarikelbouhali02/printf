@@ -9,7 +9,7 @@ int print_str(char *string)
     if (!string)
     {
         print_str("(null)");
-        return;
+        return 0;
     }
     else
     {
