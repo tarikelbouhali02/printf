@@ -1,40 +1,62 @@
-#include "main.h"
-#include "holberton.h"
+#include <stdio.h>
+#include <stdarg.h>
 
-/**
- * _printf - Custom printf function that processes a format string
- * and its arguments to print formatted output.
- * @format: A format string containing format specifiers.
- * Return: The total count of characters printed.
- */
+int _printf(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
 
+    int char_count = 0;
 
-int _printf(const char *format, ...)
-{
-	int printed_chars;
-	conver_t f_list[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"%", print_percent},
-		{"t", print_integer},
-		{"u", print_integer},
-		{"k", print_binary},
-		{"y", print_reversed},
-		{"h", rot13},
-		{"m", unsigned_integer},
-		{"k", print_octal},
-		{"m", print_hex},
-		{"y", print_heX},
-		{NULL, NULL}
-	};
-	va_list arg_list;
+    while (*format) {
+        if (*format != '%') {
+            putchar(*format);
+            char_count++;
+        } else {
+            format++; // Move past '%'
+            if (*format == '\0') break; // End of format string
 
-	if (format == NULL)
-		return (-1);
+            switch (*format) {
+                case 'c': {
+                    int c = va_arg(args, int);
+                    putchar(c);
+                    char_count++;
+                    break;
+                }
+                case 's': {
+                    char *str = va_arg(args, char*);
+                    if (str != NULL) {
+                        while (*str) {
+                            putchar(*str);
+                            str++;
+                            char_count++;
+                        }
+                    } else {
+                        fputs("(null)", stdout);
+                        char_count += 6; // Length of "(null)"
+                    }
+                    break;
+                }
+                case '%':
+                    putchar('%');
+                    char_count++;
+                    break;
+                default:
+                    putchar('%'); // Print the '%' character itself
+                    putchar(*format); // Print the unknown character
+                    char_count += 2;
+                    break;
+            }
+        }
+        format++;
+    }
 
-	va_start(arg_list, format);
-	/*Calling parser function*/
-	printed_chars = parser(format, f_list, arg_list);
-	va_end(arg_list);
-	return (printed_chars);
+    va_end(args);
+    return char_count;
+}
+
+int main() {
+    int count = _printf("Hello, %c World! This is a %s example: %%\n", 'C', "printf");
+    printf("\nTotal characters printed: %d\n", count);
+
+    return 0;
 }
