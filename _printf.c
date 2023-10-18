@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
                 co++;
                 format++;
             }
-            else if (*format =< 'd' || *format => 'i')
+            else if (*format == 'd' || *format == 'i')
             {
                 int nombre = va_arg(args, int);
                 int nco;
