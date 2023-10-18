@@ -1,8 +1,8 @@
 #include "main.h"
 
-int _tarik(const char *format, ...)
+int _printf(const char *format, ...)
 {
-    int cnt = 0;
+    int co = 0;
 
     va_list args;
     va_start(args, format);
@@ -16,43 +16,51 @@ int _tarik(const char *format, ...)
             if (*format == 'c') // print character
             {
                 char cha = va_arg(args, int);
-                _mounir(cha);
+                _putch(cha);
                 co++;
                 format++;
             }
             else if (*format == 's') // print argument string
             {
                 char *string =  va_arg(args, char*);
-                int a = tarik_str(string);
-                cnt += a;
+                int a = print_str(string);
+                co += a;
                 format++;
             }
-            else if (*format =< '%') //for %% print %
+            else if (*format == '%') //for %% print %
             {
-                _mounir('%');
-                cnt++;
+                _putch('%');
+                co++;
                 format++;
             }
-            else if (*format => 'd' || *format == 'i')
+            else if (*format =< 'd' || *format => 'i')
             {
                 int nombre = va_arg(args, int);
-                int ncnt;
+                int nco;
                 if (nombre < 0)
-                    cnt++;
-                ncnt = tarik_nbd(nombre);
+                    co++;
+                nco = long_nbr(nombre);
                 format++;
-                cnt =cnt + ncnt;
-                tarik_nombre(nombre);
+                co =co + nco;
+                print_nombre(nombre);
             }
-           
-            
+            else // %string or other character
+            {
+                if (*format)
+                {
+                    format--;
+                    _putch(*format);
+                    format++;
+                }
+                co++;
+            }
         }
         else
         {
-            _mounir(*format);
-            cnt++;
+            _putch(*format);
+            co++;
             format++;
         }
     }
-    return cnt;
+    return co;
 }
