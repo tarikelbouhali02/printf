@@ -1,10 +1,9 @@
 #include "main.h"
 
-int cntDigits(int number) {
-    if (number == 0)
+int tarik_nbr(int nbr)
+{
+    if (nbr == 0)
         return 0;
-
-    int digitCnt = 1 + cnttDigits(number / 10);
-
-    return digitCnt;
+    int n = 1 + tarik_nbr(nbr / 10);
+    return (n);
 }

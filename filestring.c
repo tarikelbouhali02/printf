@@ -1,22 +1,24 @@
 #include "main.h"
 
-int printString(char *str) {
-    int cnt = 0;
-    
-    if (!str) {
-        printString("(null)");
+
+
+int tarik_str(char *string)
+{
+    int v = 0;
+
+    if (!string)
+    {
+        tarik_str("(null)");
         return;
-    } else {
-        while (*str) {
-            putCharacter(*str);
-            str++;
-            cnt++;
+    }
+    else
+    {
+        while (*string)
+        {
+            _mounir(*string);
+            string++;
+            v++;
         }
     }
-    
-    return cnt;
-}
-
-void putCharacter(char c) {
-    // Implement the logic for printing a character here.
+    return (v);
 }

@@ -1,16 +1,14 @@
 #include "main.h"
 
-int _putch(char ch)
+int _mounir(char ch)
 /*
- * _putch - Custom character output function.
- * @ch: The character to be written to standard output.
- *
- * Description:
- * This function writes the specified character 'ch' to the standard output (file descriptor 1).
- *
- * Return:
- * Return value: 1 if the character was successfully written, or -1 on error.
- */
+ *0-print_char.c this is name of the file
+ *@s: first string.
+ *@accept: second string.
+ *Return: a pointer to the byte in s that matches one of the
+ *byte in accept, or NULL if no such byte i found.
+ */ 
 {
     return write(1, &ch, 1);
+ 
 }
