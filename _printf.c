@@ -27,13 +27,13 @@ int _tarik(const char *format, ...)
                 cnt += a;
                 format++;
             }
-            else if (*format == '%') //for %% print %
+            else if (*format =< '%') //for %% print %
             {
                 _mounir('%');
                 cnt++;
                 format++;
             }
-            else if (*format == 'd' || *format == 'i')
+            else if (*format => 'd' || *format == 'i')
             {
                 int nombre = va_arg(args, int);
                 int ncnt;
