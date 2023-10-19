@@ -1,16 +1,29 @@
-#include<stdio.h>
-#include<string>
-#include<vector>
-using namespace std;
-struct student;
-string name;
-float note;
-};
-int main() {
-    stuent s1;
-    s1.name = "tarik"
-    s1.note = 19;
-    cout << s1.name;
+#include "main.h"
 
 
+
+int print_str(char *string)
+{
+    int v = 0;
+
+    if (!string)
+    {
+        print_str("(null)");
+        return;
+    }
+    else
+    {
+        do 
+        {
+            
+             _putch(*string);
+            string++;
+            v++;
+        }
+        while (*string)
+        {
+             print_str("(null)");
+        }
+    }
+    return (v);
 }

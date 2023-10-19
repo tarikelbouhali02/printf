@@ -16,8 +16,7 @@ int _printf(const char *format, ...)
             if (*format == 'c') // print character
             {
                 char cha = va_arg(args, int);
-                _putch(cha);
-                co++;
+                cnt+=_putch(cha);
                 format++;
             }
             else if (*format == 's') // print argument string
